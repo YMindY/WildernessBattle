@@ -1,5 +1,5 @@
 name: WildernessBattle
-main: WildernessBattle\class\Main
+main: WildernessBattle\classes\Main
 version: 0.0.1
 load: POSTWORLD
 author: xMing,...
