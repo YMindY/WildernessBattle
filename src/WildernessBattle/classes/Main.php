@@ -1,7 +1,7 @@
 <?php
 namespace WildernessBattle\classes;
 
-use WildernessBattle\classes\abstract\Logger;
+use WildernessBattle\classes\abstractc\Logger;
 
 class Main extends Logger {
 }
