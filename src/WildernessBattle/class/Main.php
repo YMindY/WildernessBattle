@@ -1,8 +1,7 @@
 <?php
 namespace WildernessBattle\class;
 
-use pocketmine\plugin\PluginBase;
+use WildernessBattle\class\abstract\Logger;
 
-class Main extends PluginBase{
-
+class Main extends Logger {
 }
