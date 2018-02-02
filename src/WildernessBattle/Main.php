@@ -17,9 +17,16 @@ class Main extends RegisterModules {
       $this->registerClass();
       $this->Log("| WildernessBattle | is Enabled! author: xMing","n");
    }
+   	public function onDisable() {
+     	$this->Log("| WildernessBattle | Disabled.","n");
+   	}
    	public function CreateConfig(){
-    		if(!is_dir($this->getDataFolder())) mkdir($this->getDataFolder(),0777,true);
-    		if(!is_dir($this->getDataFolder()."room/")) mkdir($this->getDataFolder()."room/",0777,true);
+      $paths=["","room/","error_logs/"];
+      foreach($paths as $path){
+    		   if(!is_dir($this->getDataFolder().$path))
+    		   mkdir($this->getDataFolder().$path,0777,true);
+      }
+      unset($paths);
    	}
    	public function getDateT(){
     		return date("Y-m-d H:i:s");

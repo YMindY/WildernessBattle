@@ -4,7 +4,8 @@
 * 引用此版权
 * Copyright (c) 2017-2018 TeaTech All right Reserved.
 * 该版权所属class，略作更改
-* 作者: xMing
+* 原作者: Teaclon(我想说你拼的字看不清)
+* 改编者: xMing
 **/
 
 
@@ -13,7 +14,7 @@ namespace WildernessBattle\abstractc;
 use pocketmine\command\CommandExecutor;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
-use WildernessBattle\classes\Main;
+use WildernessBattle\Main;
 
 abstract class Module
 {

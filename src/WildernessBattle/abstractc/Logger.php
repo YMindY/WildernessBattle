@@ -5,9 +5,6 @@ use pocketmine\plugin\PluginBase;
 
 //继承了PluginBase的初始化类
 abstract class Logger extends PluginBase {
-	public function onDisable() {
-    	$this->Log("| WildernessBattle | Disabled.","n");
- 	}
 	//更加方便的控制台显示
    public function Log(String $text,$type) {
        switch($type){
@@ -24,5 +21,5 @@ abstract class Logger extends PluginBase {
           $this->getLogger()->notice($text);
        break;
        }
-    } 
+    }
 }

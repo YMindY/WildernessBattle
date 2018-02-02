@@ -66,11 +66,12 @@ abstract class RegisterModules extends CommandManager{
 				{
 					$this->Log("§6模块§e ".$this->name[$id]." §c加载失败","e");
 					$this->Log($e->getMessage(),"e");
-					$this->err_log_record(date("[Y-m-d H:i:s]").$this->getDescription()->getName()." >> "."ClassName: ".$this->name[$id].";  "."Error_Message: ".$e->getMessage(), date("Y-m-d-H-i-s").$this->name[$id]."加载日志.log");
+					$this->err_log_record(date("[Y-m-d H:i:s]").$this->getDescription()->getName()." >> "."ClassName: ".$this->name[$id].";  "."Error_Message: ".$e->getMessage(), date("Y-m-d-H-i-s")."Modules");
 					$this->Log($this->getName()."§6已生成日志记录".date("Y-m-d-H").$this->name[$id]."加载日志.log, 请提供文件夹中的日志给开发者.","e");
 				}
 		}
-		$this->registerExecutors();
+		
+		
 		$this->Log("[".$this->getName()."]§d所有模块加载完毕, 耗时 [§a".round(microtime(true) - $start,3)."§d] s.","i");
 		$this->Log("[".$this->getName()."]§e查询指令帮助请输入 §d/§6ymwb §e.","i");
 	}
