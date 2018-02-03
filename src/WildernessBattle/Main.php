@@ -6,15 +6,23 @@
 **/
 namespace WildernessBattle;
 
-use WildernessBattle\abstractc\RegisterModules;
+use WildernessBattle\abstractc\CommandManager;
 
-class Main extends RegisterModules {
+class Main extends CommandManager {
    public function onLoad(){
       $this->Log("| WildernessBattle | is Loading...","n");
    }
    public function onEnable(){
-      $this->CreateConfig();
+      $this->CreateConfig();	
+      $start = microtime(true);
+      $this->Log("§a▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼","i");
+      $this->Log(">> 插件系统开始加载","n");
+      $this->Log("<<<<<<<<<<<<<<<<<<<<<","i");
       $this->registerClass();
+      $this->Log("<<<<<<<<<<<<<<<<<<<<<","i");
+      $this->registerExecutors();
+      $this->Log("[".$this->getName()."]§d插件系统加载完毕, 耗时 [§a".round(microtime(true) - $start,3)."§d] s.","i");
+      $this->Log("§a▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲","i");
       $this->Log("| WildernessBattle | is Enabled! author: xMing","n");
    }
    	public function onDisable() {

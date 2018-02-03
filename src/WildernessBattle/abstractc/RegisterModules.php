@@ -16,7 +16,7 @@ use WildernessBattle\Modules\tool\ToolManager;
 //use WildernessBattle\Modules\demo\Demo;
 /* ---- END ---- */
 
-abstract class RegisterModules extends CommandManager{
+abstract class RegisterModules extends Logger{
 	/**
 	 * 这个类存放Modules;
 	**/
@@ -53,7 +53,7 @@ abstract class RegisterModules extends CommandManager{
 	
 	public final function registerClass() // 注册类;
 	{
-		$this->Log("[".$this->getName()."]>> §e正在加载模块......","n");
+		$this->Log(">> §e模块系统加载中\n>>>>>>>>>>>>>>>>>>>>","n");
 		$start = microtime(true);
 		foreach($this->class as $id => $class)
 		{
@@ -70,9 +70,7 @@ abstract class RegisterModules extends CommandManager{
 					$this->Log($this->getName()."§6已生成日志记录".date("Y-m-d-H").$this->name[$id]."加载日志.log, 请提供文件夹中的日志给开发者.","e");
 				}
 		}
-		$this->registerExecutors();
-		$this->Log("[".$this->getName()."]§d所有模块加载完毕, 耗时 [§a".round(microtime(true) - $start,3)."§d] s.","i");
-		$this->Log("[".$this->getName()."]§e查询指令帮助请输入 §d/§6ymwb §e.","i");
+		$this->Log("§e模块系统加载完毕, 耗时 [§a".round(microtime(true) - $start,3)."§e] s.","i");	
 	}
 	
 	
