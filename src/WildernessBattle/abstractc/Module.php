@@ -11,16 +11,16 @@
 
 namespace WildernessBattle\abstractc;
 
-use pocketmine\command\CommandExecutor;
-use pocketmine\command\CommandSender;
-use pocketmine\command\PluginCommand;
+
 use WildernessBattle\Main;
+
+use pocketmine\event\Listener;
 
 abstract class Module
 {
 	protected $main;
 	private $status = false;
-	protected $commands = [];
+	protected $listeners = [];
 	public $name = null;
 	
 	
@@ -46,25 +46,15 @@ abstract class Module
 		return $this->status;
 	}
 	
-	protected final function registerCommands()
+	protected final function registerListeners()
 	{
-		if(empty($this->commands))
-		{
-			return;
-		}
-		if(!($this instanceof CommandExecutor))
-		{
-			throw new \Exception('该类没有继承CommandExecutor接口');
-		}
-		
-		foreach($this->commands as $command)
-		{
-			$command = $this->main->getServer()->getCommandMap()->getCommand($command);
-			if(($command !== null) && ($command instanceof PluginCommand) && ($command->getPlugin() === $this->main))
-			{
-				$command->setExecutor($this);
-			}
-		}
+	   foreach($this->listeners as $l){
+	      	if(!($l instanceof Listener)){
+			throw new \Exception('该类没有继承Listener接口');
+	      	}else{
+	      $this->main->getServer()->getPluginManager()->registerEvents($l,$this->main);
+	      }
+	   }
 	}
 	
 	

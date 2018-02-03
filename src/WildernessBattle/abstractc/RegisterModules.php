@@ -53,7 +53,7 @@ abstract class RegisterModules extends Logger{
 	
 	public final function registerClass() // 注册类;
 	{
-		$this->Log(">> §e模块系统加载中\n>>>>>>>>>>>>>>>>>>>>","n");
+		$this->Log(">> §e模块系统加载中","n");
 		$start = microtime(true);
 		foreach($this->class as $id => $class)
 		{

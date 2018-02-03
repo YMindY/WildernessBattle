@@ -15,7 +15,7 @@ class CommandManager extends RegisterModules{
       "game" => gce::class
    ];
    public final function registerExecutors(){
-      $this->Log(">> §e指令系统加载中\n>>>>>>>>>>>>>>>>>>>>","n");
+      $this->Log(">> §e指令系统加载中","n");
      	$start = microtime(true);
       foreach($this->executors as $n => $c){
          try{

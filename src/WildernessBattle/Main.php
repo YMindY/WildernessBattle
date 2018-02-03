@@ -15,14 +15,12 @@ class Main extends CommandManager {
    public function onEnable(){
       $this->CreateConfig();	
       $start = microtime(true);
-      $this->Log("§a▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼","i");
-      $this->Log(">> 插件系统开始加载","n");
+      $this->Log("\n>>> §a插件系统开始加载\n","n");
       $this->Log("<<<<<<<<<<<<<<<<<<<<<","i");
       $this->registerClass();
       $this->Log("<<<<<<<<<<<<<<<<<<<<<","i");
       $this->registerExecutors();
-      $this->Log("[".$this->getName()."]§d插件系统加载完毕, 耗时 [§a".round(microtime(true) - $start,3)."§d] s.","i");
-      $this->Log("§a▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲","i");
+      $this->Log("\n>>> §d插件系统加载完毕, 耗时 [§a".round(microtime(true) - $start,3)."§d] s.\n","i");
       $this->Log("| WildernessBattle | is Enabled! author: xMing","n");
    }
    	public function onDisable() {
