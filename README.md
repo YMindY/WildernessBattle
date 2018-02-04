@@ -1,6 +1,6 @@
 > # **WildernessBattle**
 *English readme: *
-*Ps: 听说点星星可以让我写得更快哦！(Star can make the author work faster!)*
+###### *Ps: 听说点星星可以让我写得更快哦！(Star can make the author work faster!)*
 * **The HOTTEST game in China!!!**
 * *This is a game plugin for PocketMine Server.*
 ---
