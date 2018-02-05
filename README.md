@@ -1,5 +1,5 @@
 > # **WildernessBattle**
-*English readme:*
+*English readme:* (汉语看下面)
 * **The HOTTEST game in China!!!**
 * *This is a game plugin for PocketMine Server.*
 ---
