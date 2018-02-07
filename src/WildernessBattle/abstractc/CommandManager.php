@@ -32,7 +32,7 @@ class CommandManager extends RegisterModules{
    public function onCommand(CommandSender $sender, Command $cmd,/* string */$label, array $arg)/*:bool*/{
       if($cmd->getName()=="ymwb"){
          if(!isset($arg[0])){
-            $sender->sendMessage("usage: /ymwb");
+            $sender->sendMessage("usage: /ymwb [room/game]");
             return false;
          }
          if($arg[0]=="room"){
