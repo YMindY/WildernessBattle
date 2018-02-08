@@ -18,6 +18,9 @@ class CommandExecutor{
    	   }
    	   switch($args[2]){
    	      case "add":
+   	         if(count($args)<5){
+   	            $sender->sendMessage("");
+   	         }
           break;
           case "remove":
           break;
