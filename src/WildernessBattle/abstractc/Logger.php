@@ -32,15 +32,27 @@ abstract class Logger extends PluginBase {
     }
         //多语言消息
     public $PluginMessage = [
-       "eng" => ["log"=>["Plugin system started to load",
-                       "Module system is loading",
-                       "Module system has finished loading. Timeconsuming: ",
-                       "Command system is loading",
-                       "Command system has finished loading. Timeconsuming: ",
-                       "Plugin system has finished loading. Timeconsuming: ",
-                       "| WildernessBattle | Enabled! author: xMing",
-                       "| WildernessBattle | Disabled.",
-                       "| WildernessBattle | is Loading..."
+       "eng" => ["log"=>["Plugin system started to load",//0
+                       "Module system is loading",//1
+                       "Module system has finished loading. Timeconsuming: ",//2
+                       "Command system is loading",//3
+                       "Command system has finished loading. Timeconsuming: ",//4
+                       "Plugin system has finished loading. Timeconsuming: ",//5
+                       "| WildernessBattle | Enabled! author: xMing",//6
+                       "| WildernessBattle | Disabled.",//7
+                       "| WildernessBattle | is Loading..."//8
+                      ],
+               "mod"=>["Module",//0
+                       "RoomModule",//1
+                       "GameModule",//2
+                       "ToolModule",//3
+                       //"DemoModule"
+                       "Command",//4
+                       "Command Load-Log",//5
+                       "Load Failure",//6
+                       "Load-Log",//7
+                       "Generated log records",//8
+                       "Please provide the developer with the log in the folder to the developer"//9
                       ],
                "cmd"=>["room"=>[
                                ],
@@ -57,6 +69,18 @@ abstract class Logger extends PluginBase {
                        "| 荒野大逃杀 | 已启动! 作者: xMing",
                        "| 荒野大逃杀 | 已关闭",
                        "| 荒野大逃杀 | 正在加载中...",
+                      ],
+               "mod"=>["模块",
+                       "房间模块",
+                       "游戏模块",
+                       "工具模块",
+                       //"备用模块"
+                       "指令",
+                       "指令加载日志",
+                       "加载失败",
+                       "加载日志",
+                       "已生成日志记录",
+                       "请提供文件夹中的日志给开发者"
                       ],
                "cmd"=>["room"=>[
                                ],

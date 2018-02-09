@@ -15,19 +15,19 @@ class CommandManager extends RegisterModules{
       "game" => gce::class
    ];
    public final function registerExecutors(){
-      $this->Log(">> §e指令系统加载中","n");
+      $this->Log(">> §e".$this->getMessage("log")[3],"n");
      	$start = microtime(true);
       foreach($this->executors as $n => $c){
          try{
             $this->$n=new $c($this);
          }catch(\Exception $e){
-       					$this->Log("§6指令 §e".$n."指令§c加载失败","e");
+       					$this->Log("§6".$this->getMessage("mod")[4]." §e".$n.$this->getMessage("mod")[4]." §c".$this->getMessage("mod")[6],"e");
 			       		$this->Log($e->getMessage(),"e");
-			       		$this->err_log_record(date("[Y-m-d H:i:s]").$this->getDescription()->getName()." >> "."ClassName: ".$n.";  "."Error_Message: ".$e->getMessage(), date("Y-m-d-H-i-s").$n."指令加载日志.log");
-		  	      		$this->Log($this->getName()."§6已生成日志记录".date("Y-m-d-H").$n."指令加载日志.log, 请提供文件夹中的日志给开发者.","e");
+			       		$this->err_log_record(date("[Y-m-d H:i:s]").$this->getDescription()->getName()." >> "."ClassName: ".$n.";  "."Error_Message: ".$e->getMessage(), date("Y-m-d-H-i-s").$n.$this->getMessage("mod")[5].".log");
+		  	      		$this->Log("§6".$this->getMessage("mod")[8]." [".date("Y-m-d-H").$n.$this->getMessage("mod")[5].".log] .".$this->getMessage("mod")[9],"e");
 			     	}
       }
-      $this->Log("§e指令系统加载完毕, 耗时 [§a".round(microtime(true) - $start,3)."§e] s.","i");
+      $this->Log("§e".$this->getMessage("log")[4]." [§a".round(microtime(true) - $start,3)."§e] s.","i");
    }
    public function onCommand(CommandSender $sender, Command $cmd,/* string */$label, array $arg)/*:bool*/{
       if($cmd->getName()=="ymwb"){

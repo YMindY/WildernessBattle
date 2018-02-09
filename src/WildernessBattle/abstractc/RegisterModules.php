@@ -3,7 +3,7 @@
 * 引用此版权
 * Copyright (c) 2017-2018 TeaTech All right Reserved.
 * 该版权所属class，略作更改
-* 原作者: Teaclon(我想说你拼的字看不清)
+* 此class原作者: Teaclon
 * 改编者: xMing
 **/
 namespace WildernessBattle\abstractc;
@@ -28,12 +28,10 @@ abstract class RegisterModules extends Logger{
 	
 	public $name =
 	[
-		self::MOD_ROOMMODULE=>"房间模块",         
-		self::MOD_GAMEMODULE=>"游戏模块",      
-		self::MOD_TOOLMODULE=>"工具模块",  
-//		self::MOD_DEMOMODULE=>"备用模块"
-	];
-	
+		self::MOD_ROOMMODULE => "RoomModule",
+		self::MOD_GAMEMODULE => "GameModule",
+		self::MOD_TOOLMODULE => "ToolModule"
+  ];
 	public $class =
 	[
 		self::MOD_ROOMMODULE            => RoomManager::class,
@@ -52,8 +50,11 @@ abstract class RegisterModules extends Logger{
 	
 	
 	public final function registerClass() // 注册类;
-	{
-		$this->Log(">> §e模块系统加载中","n");
+	{  
+       for($i=1;$i<=count($this->name);$i++){
+          $this->name[$i-1] = $this->getMessage("mod")[$i];
+      }
+		$this->Log(">> §e".$this->getMessage("log")[1],"n");
 		$start = microtime(true);
 		foreach($this->class as $id => $class)
 		{
@@ -64,13 +65,13 @@ abstract class RegisterModules extends Logger{
 				}
 				catch(\Exception $e)
 				{
-					$this->Log("§6模块§e ".$this->name[$id]." §c加载失败","e");
+					$this->Log("§6".$this->getMessage("mod")[0]."§e ".$this->name[$id]." §c".$this->getMessage("mod")[6],"e");
 					$this->Log($e->getMessage(),"e");
-					$this->err_log_record(date("[Y-m-d H:i:s]").$this->getDescription()->getName()." >> "."ClassName: ".$this->name[$id].";  "."Error_Message: ".$e->getMessage(), date("Y-m-d-H-i-s").$this->name[$id]."加载日志.log");
-					$this->Log($this->getName()."§6已生成日志记录".date("Y-m-d-H").$this->name[$id]."加载日志.log, 请提供文件夹中的日志给开发者.","e");
+					$this->err_log_record(date("[Y-m-d H:i:s]").$this->getDescription()->getName()." >> "."ClassName: ".$this->name[$id].";  "."Error_Message: ".$e->getMessage(), date("Y-m-d-H-i-s").$this->name[$id].$this->getMessage("mod")[7].".log");
+					$this->Log("§6".$this->getMessage("mod")[8]." [".date("Y-m-d-H").$this->name[$id].$this->getMessage("mod")[7].".log]. ".$this->getMessage("mod")[9],"e");
 				}
 		}
-		$this->Log("§e模块系统加载完毕, 耗时 [§a".round(microtime(true) - $start,3)."§e] s.","i");	
+		$this->Log("§e".$this->getMessage("log")[2]." [§a".round(microtime(true) - $start,3)."§e] s.","i");	
 	}
 	
 	
