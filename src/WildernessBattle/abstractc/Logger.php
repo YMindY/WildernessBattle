@@ -24,7 +24,7 @@ abstract class Logger extends PluginBase {
        }
     }
     public function getLanguage(){
-       $conf=new Config($this->getDataFolder()."lauguage.yml",Config::YAML,array("PluginLanguage"=>"eng"));
+       @$conf=new Config($this->getDataFolder()."lauguage.yml",Config::YAML,array("ChooseOne"=>"eng,chs","PluginLanguage"=>"eng"));
        return $conf->get("PluginLanguage");
     }
     public function getMessage($kind){
@@ -54,7 +54,9 @@ abstract class Logger extends PluginBase {
                        "Generated log records",//8
                        "Please provide the developer with the log in the folder to the developer"//9
                       ],
-               "cmd"=>["room"=>[
+               "cmd"=>["room"=>["usage: /ymwb room [add/remove/info]",
+                                "usage: /ymwb room add [range(field diameter)] [players maximum number]",
+                                'Room configuration creation, id&1, range &2, the maximum number of players &3'
                                ],
                        "game"=>[
                                ]
@@ -82,7 +84,9 @@ abstract class Logger extends PluginBase {
                        "已生成日志记录",
                        "请提供文件夹中的日志给开发者"
                       ],
-               "cmd"=>["room"=>[
+               "cmd"=>["room"=>["使用方法: /ymwb room [add/remove/info]",
+                                "使用方法: /ymwb room add [范围(场地直径)] [最大玩家数]",
+                                '房间配置创建中，id&1，范围&2，最大玩家数&3'
                                ],
                        "game"=>[
                                ]

@@ -30,7 +30,7 @@ class Main extends CommandManager {
      	$this->Log($this->getMessage("log")[7],"n");
    	}
    	public function CreateConfig(){
-      $paths=["","room/","error_logs/"];
+      $paths=["","room/","room/rooms/","error_logs/"];
       foreach($paths as $path){
     		   if(!is_dir($this->getDataFolder().$path))
     		   mkdir($this->getDataFolder().$path,0777,true);
