@@ -23,10 +23,12 @@ abstract class Logger extends PluginBase {
        break;
        }
     }
+       //获取插件语言
     public function getLanguage(){
        @$conf=new Config($this->getDataFolder()."lauguage.yml",Config::YAML,array("ChooseOne"=>"eng,chs","PluginLanguage"=>"eng"));
        return $conf->get("PluginLanguage");
     }
+       //获取消息
     public function getMessage($kind){
        return $this->PluginMessage[$this->getLanguage()][$kind];
     }
@@ -56,7 +58,10 @@ abstract class Logger extends PluginBase {
                       ],
                "cmd"=>["room"=>["usage: /ymwb room [add/remove/info]",
                                 "usage: /ymwb room add [range(field diameter)] [players maximum number]",
-                                'Room configuration creation, id&1, range &2, the maximum number of players &3'
+                                'Room configuration creation, id&1, range &2, the maximum number of players &3\nPlease click on a block as the center of the map.',
+                                "usage: /ymwb room &cmd [ID]",
+                                "There is no room for this!",
+                                "The information in the room &id is as follows: \n Center Point: &pos\n range: &range\nMax Player: &mp"
                                ],
                        "game"=>[
                                ]
@@ -84,9 +89,12 @@ abstract class Logger extends PluginBase {
                        "已生成日志记录",
                        "请提供文件夹中的日志给开发者"
                       ],
-               "cmd"=>["room"=>["使用方法: /ymwb room [add/remove/info]",
-                                "使用方法: /ymwb room add [范围(场地直径)] [最大玩家数]",
-                                '房间配置创建中，id&1，范围&2，最大玩家数&3'
+               "cmd"=>["room"=>["使用方法: /ymwb room [add/remove/info]",//0
+                                "使用方法: /ymwb room add [范围(场地直径)] [最大玩家数]",//1
+                                '房间配置创建中，id&1，范围&2，最大玩家数&3\n请点击一个方块，作为地图的中心点。',//2
+                                "使用方法: /ymwb room &cmd [房间ID]",//3
+                                "不存在此房间!",//4
+                                "房间&id的信息如下:\n中心点: &pos\n范围: &range\n最大人数: &mp"//5
                                ],
                        "game"=>[
                                ]
