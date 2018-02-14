@@ -5,8 +5,9 @@ use WildernessBattle\Main;
 
 use pocketmine\command\CommandSender;
 use pocketmine\utils\Config;
+use pocketmine\event\Listener;
 
-class CommandExecutor{
+class CommandExecutor implements Listener{
    	private $room;
    	private $main;
    	public function __construct(Main $main){
@@ -33,7 +34,7 @@ class CommandExecutor{
    	         */
    	         $this->createConfig("r".$id,array("id"=>$id,"pos"=>"x:x","range"=>$args[2],"MaxPlayer"=>$args[3],"Chests"=>array()));
    	         $sender->sendMessage(str_replace(array("&1","&2","&3"),array($id,$args[2],$args[3]),$this->getMessage(2)));
-   	         $this->{$sender->getName()}=array("state"=>"add");
+   	         $this->{$sender->getName()}=array("id"=>$id,"state"=>"add");
    	         unset($id);
    	         return true;
           break;
@@ -62,11 +63,30 @@ class CommandExecutor{
              unset($ri);
              return true;
           break;
-          case "set":
+          case "cen":
+             if(!$this->isSettingPlayer($sender)){
+                return false;
+             }
+             $conf=$this->createConfig("r".$this->{$sender->getName()}["id"]);
+             $player=$this->getServer()->getPlayer($sender->getName());
+             $conf->set("pos",$player->getLevel()->getName().":".$player->getX().":".$player->getZ());
+             unset($conf);
+             unset($player);
+             return true;
           break;
           case "quit":
+             if(!$this->isSettingPlayer($sender)){
+                return false;
+             }
+             unlink($this->getDataFolder()."r".$this->{$sender->getName()}["id"]);
+             unset($this->{$sender->getName()});
+             $sender->sendMessage($this->getMessage(7));
+             return false;
    	      break;
    	      case "end":
+   	         if(!$this->isSettingPlayer($sender)){
+                return false;
+             }
    	      break;
           default:
    	         $sender->sendMessage($this->getMessage(0));
@@ -90,10 +110,17 @@ class CommandExecutor{
           $sender->sendMessage(str_replace("&cmd",$cmd,$this->getMessage(3)));
           return true;
        }
-       if(!in_array(RoomManager::getModule()->config->get("RoomList"),"r".$args)){
+       if(!in_array("r".$args[2],RoomManager::getModule()->config->get("RoomList"))){
           $sender->sendMessage($this->getMessage(4));
           return true;
        }
        return false;
+   	}
+   	private function isSettingPlayer($sender){
+   	   if(!isset($this->{$sender->getName()})){
+   	      $sender->sendMessage($this->getMessage(6));
+   	      return false;
+   	   }
+   	   return true;
    	}
 }

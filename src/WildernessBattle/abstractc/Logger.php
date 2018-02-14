@@ -58,10 +58,12 @@ abstract class Logger extends PluginBase {
                       ],
                "cmd"=>["room"=>["usage: /ymwb room [add/remove/info]",
                                 "usage: /ymwb room add [range(field diameter)] [players maximum number]",
-                                'Room configuration creation, id&1, range &2, the maximum number of players &3\nPlease click on a block as the center of the map.',
+                                "Room configuration creation, id&1, range &2, the maximum number of players &3\nPlease stand on a block as the center of the map and use [/ymwb room cen].",
                                 "usage: /ymwb room &cmd [ID]",
                                 "There is no room for this!",
-                                "The information in the room &id is as follows: \n Center Point: &pos\n range: &range\nMax Player: &mp"
+                                "The information in the room &id is as follows: \n Center Point: &pos\n range: &range\nMax Player: &mp",
+                                "This command cannot be used because you are not setting up a room or you are not doing this step",
+                                "You have quit settings, just set the data clear."
                                ],
                        "game"=>[
                                ]
@@ -94,7 +96,9 @@ abstract class Logger extends PluginBase {
                                 '房间配置创建中，id&1，范围&2，最大玩家数&3\n请点击一个方块，作为地图的中心点。',//2
                                 "使用方法: /ymwb room &cmd [房间ID]",//3
                                 "不存在此房间!",//4
-                                "房间&id的信息如下:\n中心点: &pos\n范围: &range\n最大人数: &mp"//5
+                                "房间&id的信息如下:\n中心点: &pos\n范围: &range\n最大人数: &mp",//5
+                                "不能使用这个指令，原因: 你并不在设置房间或你不是在进行这一步骤",//6
+                                "你已退出设置，刚刚设置的数据清除。"//7
                                ],
                        "game"=>[
                                ]

@@ -29,18 +29,34 @@ class CommandManager extends RegisterModules{
       }
       $this->Log("§e".$this->getMessage("log")[4]." [§a".round(microtime(true) - $start,3)."§e] s.","i");
    }
+   public function getExecutor($name){
+      return $this->$name;
+   }
    public function onCommand(CommandSender $sender, Command $cmd,/* string */$label, array $arg)/*:bool*/{
       if($cmd->getName()=="ymwb"){
          if(!isset($arg[0])){
-            $sender->sendMessage("usage: /ymwb [room/game]");
+            $sender->sendMessage($this->getMainHelp());
             return false;
          }
-         if($arg[0]=="room"){
+         switch($arg[0]){
+         case "room":
             $this->room->runCommand($sender,$arg);
-         }
-         if($arg[0]=="game"){
+         break;
+         case "game":
             $this->game->runCommand($sender,$arg);
+         break;
+         default:
+            $sender->sendMessage($this->getMainHelp());
          }
+      }
+   }
+   private function getMainHelp(){
+      switch($this->getLanguage()){
+      case "eng":
+         return "usage: /ymwb [room/game]";
+      break;
+      case "chs":
+         return "使用方法: /ymwb [room/game]";
       }
    }
 }

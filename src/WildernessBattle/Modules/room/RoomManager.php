@@ -19,9 +19,7 @@ class RoomManager extends Module{
 	  //模块名称
    public $name;
    //存储此模块的监听器，便于注册
-   protected $listeners = [
-      CommandExecutor::class
-   ];
+   protected $listeners = [];
    //用于返回$this实例
    private static $own;
    //模块主配置文件
@@ -30,6 +28,7 @@ class RoomManager extends Module{
    private function createMuduleConfig(){
       return new Config($this->main->getDataFolder()."room/Config.yml",Config::YAML,array("RoomCount"=>0,"RoomList"=>array()));
    }
+
    //模块启动执行项
    public function enable(){
       $this->name=$this->main->getMessage("mod")[1];

@@ -17,9 +17,9 @@ class Main extends CommandManager {
       $start = microtime(true);
       $this->Log("\n>>> §a".$this->getMessage("log")[0]."\n","n");
       $this->Log("<<<<<<<<<<<<<<<<<<<<<","i");
-      $this->registerClass();
-      $this->Log("<<<<<<<<<<<<<<<<<<<<<","i");
       $this->registerExecutors();
+      $this->Log("<<<<<<<<<<<<<<<<<<<<<","i");
+      $this->registerClass();
       $this->Log("\n>>> §d".$this->getMessage("log")[5]." [§a".round(microtime(true) - $start,3)."§d] s.\n","i");
       $this->Log($this->getMessage("log")[6],"n");
       if($this->getLanguage()=="eng"){
