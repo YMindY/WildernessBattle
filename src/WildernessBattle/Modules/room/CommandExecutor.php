@@ -25,14 +25,7 @@ class CommandExecutor implements Listener{
    	            return false;
    	         }
    	         $id=RoomManager::getModule()->config->get("RoomCount")+1;
-   	         /*
-   	         RoomManager::getModule()->config->set("RoomCount",$id);
-   	         $rl=RoomManager::getModule()->config->get("RoomList");
-   	         $rl[]="r".$id;
-   	         RoomManager::getModule()->config->set("RoomList",$rl);
-   	         RoomManager::getModule()->config->save();
-   	         */
-   	         $this->createConfig("r".$id,array("id"=>$id,"pos"=>"x:x","range"=>$args[2],"MaxPlayer"=>$args[3],"Chests"=>array()));
+   	         $this->createConfig("r".$id,array("id"=>$id,"waitPlace"=>"x:x:x:x","pos"=>"x:x:x:x","range"=>$args[2],"MaxPlayer"=>$args[3],"Chests"=>array()));
    	         $sender->sendMessage(str_replace(array("&1","&2","&3"),array($id,$args[2],$args[3]),$this->getMessage(2)));
    	         $this->{$sender->getName()}=array("id"=>$id,"state"=>"add");
    	         unset($id);
@@ -59,7 +52,7 @@ class CommandExecutor implements Listener{
                 return false;
              }
              $ri=$this->createConfig("r".$args[2])->getAll();
-             $sender->sendMessage(str_replace(array("&pos","&range","&mp"),array($ri["pos"],$ri["range"],$ri["MaxPlayer"]),$this->getMessage(5)));
+             $sender->sendMessage(str_replace(array("&pos","&range","&mp","&wp"),array($ri["pos"],$ri["range"],$ri["MaxPlayer"],$ri["waitPlace"]),$this->getMessage(5)));
              unset($ri);
              return true;
           break;
@@ -70,6 +63,19 @@ class CommandExecutor implements Listener{
              $conf=$this->createConfig("r".$this->{$sender->getName()}["id"]);
              $player=$this->getServer()->getPlayer($sender->getName());
              $conf->set("pos",$player->getLevel()->getName().":".$player->getX().":".$player->getZ());
+             $sender->sendMessage($this->getMessage(8));
+             unset($conf);
+             unset($player);
+             return true;
+          break;
+          case "wait":
+             if(!$this->isSettingPlayer($sender)){
+                return false;
+             }
+             $conf=$this->createConfig("r".$this->{$sender->getName()}["id"]);
+             $player=$this->getServer()->getPlayer($sender->getName());
+             $conf->set("waitPlace",$player->getLevel()->getName().":".$player->getX().":".$player->getZ());
+             $sender->sendMessage($this->getMessage(9));
              unset($conf);
              unset($player);
              return true;
@@ -87,6 +93,20 @@ class CommandExecutor implements Listener{
    	         if(!$this->isSettingPlayer($sender)){
                 return false;
              }
+             $conf=$this->createConfig("r".$this->{$sender->getName()}["id"]);
+             $player=$this->getServer()->getPlayer($sender->getName());
+             if($conf->get("pos")=="x:x:x:x" || $conf->get("waitPlace")=="x:x:x:x" || count($conf->get("Chests")<1)){
+                $sender->sendMessage($this->getMessage(10));
+                return false;
+             }
+             $id=RoomManager::getModule()->config->get("RoomCount")+1;
+             RoomManager::getModule()->config->set("RoomCount",$id);
+   	         $rl=RoomManager::getModule()->config->get("RoomList");
+   	         $rl[]="r".$id;
+   	         RoomManager::getModule()->config->set("RoomList",$rl);
+   	         RoomManager::getModule()->config->save();
+   	         $sender->sendMessage($this->getMessage(11));
+   	         return true;
    	      break;
           default:
    	         $sender->sendMessage($this->getMessage(0));
