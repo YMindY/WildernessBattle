@@ -7,11 +7,27 @@ use pocketmine\command\CommandSender;
 use pocketmine\utils\Config;
 use pocketmine\event\Listener;
 
+use pocketmine\event\player\PlayerInteractEvent;
+
 class CommandExecutor implements Listener{
    	private $room;
    	private $main;
    	public function __construct(Main $main){
 	     	$this->main=$main;
+   	}
+   	public function onClickBlock(PlayerInteractEvent $e){
+   	   $p=$e->getPlayer();
+   	   if(isset($this->{$p->getName()})){
+   	      if($this->{$p->getName()}["state"]=="wait"){
+   	         if($e->getBlock()->getID=54()){
+   	            $list=$this->{$p->getName()};
+   	            $conf=$this->createConfig("r".$list["id"]);
+   	            $che=$conf->get("Chests");
+   	            $b=$e->getBlock();
+   	            $che[]=$b->getX().":".$b->getY().":".$b->getZ();
+   	         }
+   	      }
+   	   }
    	}
    	public function runCommand(CommandSender $sender,array $args){
    	   if(!isset($args[1])){
@@ -64,6 +80,7 @@ class CommandExecutor implements Listener{
              $player=$this->getServer()->getPlayer($sender->getName());
              $conf->set("pos",$player->getLevel()->getName().":".$player->getX().":".$player->getZ());
              $sender->sendMessage($this->getMessage(8));
+             $this->{$sender->getName()}["state"]="cen";
              unset($conf);
              unset($player);
              return true;
@@ -76,6 +93,7 @@ class CommandExecutor implements Listener{
              $player=$this->getServer()->getPlayer($sender->getName());
              $conf->set("waitPlace",$player->getLevel()->getName().":".$player->getX().":".$player->getZ());
              $sender->sendMessage($this->getMessage(9));
+             $this->{$sender->getName()}["state"]="wait";
              unset($conf);
              unset($player);
              return true;
