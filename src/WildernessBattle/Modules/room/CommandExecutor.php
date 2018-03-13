@@ -19,7 +19,7 @@ class CommandExecutor implements Listener{
    	   $p=$e->getPlayer();
    	   if(isset($this->{$p->getName()})){
    	      if($this->{$p->getName()}["state"]=="wait"){
-   	         if($e->getBlock()->getID=54()){
+   	         if($e->getBlock()->getID()==54){
    	            $list=$this->{$p->getName()};
    	            $conf=$this->createConfig("r".$list["id"]);
    	            $che=$conf->get("Chests");
