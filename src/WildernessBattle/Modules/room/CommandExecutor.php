@@ -24,7 +24,21 @@ class CommandExecutor implements Listener{
    	            $conf=$this->createConfig("r".$list["id"]);
    	            $che=$conf->get("Chests");
    	            $b=$e->getBlock();
-   	            $che[]=$b->getX().":".$b->getY().":".$b->getZ();
+   	            if(!in_array($b->getX().":".$b->getY().":".$b->getZ(),$che)){
+   	               $che[]=$b->getX().":".$b->getY().":".$b->getZ();
+   	               $conf->set("Chests",$che);
+   	               $conf->save();
+   	               $p->sendMessage(str_replace("&d",count($che),$this->getMessage(12)));
+   	               $e->setCancelled();
+   	               unset($conf);
+   	               unset($che);
+   	            }else{
+   	               $p->sendMessage($this->getMessage(13));
+   	               $e->setCancelled();
+   	            }
+   	            unset($list);
+   	            unset($b);
+   	            unset($p);
    	         }
    	      }
    	   }
@@ -77,8 +91,9 @@ class CommandExecutor implements Listener{
                 return false;
              }
              $conf=$this->createConfig("r".$this->{$sender->getName()}["id"]);
-             $player=$this->getServer()->getPlayer($sender->getName());
+             $player=$this->main->getServer()->getPlayer($sender->getName());
              $conf->set("pos",$player->getLevel()->getName().":".$player->getX().":".$player->getZ());
+             $conf->save();
              $sender->sendMessage($this->getMessage(8));
              $this->{$sender->getName()}["state"]="cen";
              unset($conf);
@@ -90,8 +105,9 @@ class CommandExecutor implements Listener{
                 return false;
              }
              $conf=$this->createConfig("r".$this->{$sender->getName()}["id"]);
-             $player=$this->getServer()->getPlayer($sender->getName());
+             $player=$this->main->getServer()->getPlayer($sender->getName());
              $conf->set("waitPlace",$player->getLevel()->getName().":".$player->getX().":".$player->getZ());
+             $conf->save();
              $sender->sendMessage($this->getMessage(9));
              $this->{$sender->getName()}["state"]="wait";
              unset($conf);
@@ -112,8 +128,9 @@ class CommandExecutor implements Listener{
                 return false;
              }
              $conf=$this->createConfig("r".$this->{$sender->getName()}["id"]);
-             $player=$this->getServer()->getPlayer($sender->getName());
-             if($conf->get("pos")=="x:x:x:x" || $conf->get("waitPlace")=="x:x:x:x" || count($conf->get("Chests")<1)){
+             $player=$this->main->getServer()->getPlayer($sender->getName());
+             if($conf->get("pos")=="x:x:x:x" || $conf->get("waitPlace")=="x:x:x:x" || count($conf->get("Chests"))<1){
+                unset($this->{$sender->getName()});
                 $sender->sendMessage($this->getMessage(10));
                 return false;
              }

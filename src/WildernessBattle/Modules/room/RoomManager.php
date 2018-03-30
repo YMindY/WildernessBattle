@@ -20,6 +20,7 @@ class RoomManager extends Module{
    public $name;
    //存储此模块的监听器，便于注册
    protected $listeners = [];
+   protected $listenerNames = [];
    //用于返回$this实例
    private static $own;
    //模块主配置文件
@@ -32,6 +33,7 @@ class RoomManager extends Module{
    //模块启动执行项
    public function enable(){
       $this->name=$this->main->getMessage("mod")[1];
+      $this->fillListeners();
       $this->registerListeners();
       $this->config=$this->createMuduleConfig();
       self::$own=$this;
@@ -44,5 +46,11 @@ class RoomManager extends Module{
    //返回模块配置文件夹路径
    public static function getDataFolder(){
       return self::$own->main->getDataFolder()."room/";
+   }
+   private function fillListeners(){
+      $this->listeners[]=$this->main->getExecutor("room");
+      foreach($this->listenerNames as $n){
+         $this->listeners[]=new $n($this->main);
+      }
    }
 }

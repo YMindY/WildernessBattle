@@ -66,7 +66,9 @@ abstract class Logger extends PluginBase {
                                 "You have quit settings, just set the data clear.",
                                 "Set the center point to be successful. Next, please go to the waiting area in the air (if you have already built it) and use the [/ymwb room wait] settings.",
                                 "Unable to complete setting, cause: no center point, waiting place or chests",
-                                "Congratulations, set it up!"
+                                "Congratulations, set it up!",
+                                "The Chest has been set up successfully, and there are currently &d Chests,Click other Chests to continue,or use[/ymwb room end] to finish the room setting",
+                                "The Chest is already setted! Do not repeat it"
                                ],
                        "game"=>[
                                ]
@@ -96,7 +98,7 @@ abstract class Logger extends PluginBase {
                       ],
                "cmd"=>["room"=>["使用方法: /ymwb room [add/remove/info]",//0
                                 "使用方法: /ymwb room add [范围(场地直径)] [最大玩家数]",//1
-                                '房间配置创建中，id&1，范围&2，最大玩家数&3\n请站在一个方块上，作为地图的中心点，并使用[/ymwb room cen]设置。',//2
+                                "房间配置创建中，id&1，范围&2，最大玩家数&3\n请站在一个方块上，作为地图的中心点，并使用[/ymwb room cen]设置。",//2
                                 "使用方法: /ymwb room &cmd [房间ID]",//3
                                 "不存在此房间!",//4
                                 "房间&id的信息如下:\n中心点: &pos\n范围: &range\n最大人数: &mp\n等待区:&wp",//5
@@ -105,7 +107,9 @@ abstract class Logger extends PluginBase {
                                 "设置中心点成功，接下来请去空中的等待区(假如您已经建好了)，并使用[/ymwb room wait]设置。",//8
                                 "设置等待区成功，进入房间的玩家会被传送到这里。接下来请逐一点击地图内的箱子，推荐数量为[范围²/玩家数/10]",//9
                                 "无法完成设置，原因: 未设置中心点、等待区或箱子。",//10
-                                "恭喜你，设置完成!"//11
+                                "恭喜你，设置完成!",//11
+                                "箱子设置成功，当前共&d个箱子,点箱子继续设置，完成设置使用[/ymwb room end]",//12
+                                "该箱子已存在!请勿重复设置"//13
                                ],
                        "game"=>[
                                ]

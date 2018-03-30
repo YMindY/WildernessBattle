@@ -18,9 +18,15 @@ use pocketmine\event\Listener;
 
 abstract class Module
 {
+ //插件主类
 	protected $main;
+	//模块状态
 	private $status = false;
+	//模块所属监听器(实例)列表
 	protected $listeners = [];
+	//模块所属监听器(名字)列表
+	protected $listenerNames = [];
+	//模块名字
 	public $name = null;
 	
 	
