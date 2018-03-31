@@ -25,6 +25,7 @@ class CommandExecutor implements Listener{
    	            $che=$conf->get("Chests");
    	            $b=$e->getBlock();
    	            if(!in_array($b->getX().":".$b->getY().":".$b->getZ(),$che)){
+   	               $b->getLevel()->setBlock($b, \pocketmine\block\Block::get(54), true, true);
    	               $che[]=$b->getX().":".$b->getY().":".$b->getZ();
    	               $conf->set("Chests",$che);
    	               $conf->save();

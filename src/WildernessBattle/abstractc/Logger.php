@@ -56,20 +56,21 @@ abstract class Logger extends PluginBase {
                        "Generated log records",//8
                        "Please provide the developer with the log in the folder to the developer"//9
                       ],
-               "cmd"=>["room"=>["usage: /ymwb room [add/remove/info]",
-                                "usage: /ymwb room add [range(field diameter)] [players maximum number]",
-                                "Room configuration creation, id&1, range &2, the maximum number of players &3\nPlease stand on a block as the center of the map and use [/ymwb room cen].",
-                                "usage: /ymwb room &cmd [ID]",
-                                "There is no room for this!",
-                                "The information in the room &id is as follows: \n Center Point: &pos\n range: &range\nMax Player: &mp\nWaiting Place: &wp",
-                                "This command cannot be used because you are not setting up a room or you are not doing this step",
-                                "You have quit settings, just set the data clear.",
-                                "Set the center point to be successful. Next, please go to the waiting area in the air (if you have already built it) and use the [/ymwb room wait] settings.",
-                                "Unable to complete setting, cause: no center point, waiting place or chests",
-                                "Congratulations, set it up!",
-                                "The Chest has been set up successfully, and there are currently &d Chests,Click other Chests to continue,or use[/ymwb room end] to finish the room setting",
-                                "The Chest is already setted! Do not repeat it"
-                               ],
+               "cmd"=>["room"=>["usage: /ymwb room [add/remove/info]",//0
+                                "usage: /ymwb room add [range(field diameter)] [players maximum number]",//1
+                                "Room configuration creation, id&1, range &2, the maximum number of players &3\nPlease stand on a block as the center of the map and use [/ymwb room cen].",//2
+                                "usage: /ymwb room &cmd [ID]",//3
+                                "There is no room for this!",//4
+                                "The information in the room &id is as follows: \n Center Point: &pos\n range: &range\nMax Player: &mp\nWaiting Place: &wp",//5
+                                "This command cannot be used because you are not setting up a room or you are not doing this step",//6
+                                "You have quit settings, just set the data clear.",//7
+                                "Set the center point to be successful. Next, please go to the waiting area (if you had already built it) and use the [/ymwb room wait] to set.",//8
+                                "the waiting area has setted, the player entering the room will be sent to here first. Then please click on some block to set the Chests, The Chests' number of recommendations is [range²/maxplayer/10] .The result of the calculation is (&d)",//9
+                                "Unable to complete setting, cause: no center point, waiting place or chests",//10
+                                "Congratulations, set it up!",//11
+                                "The Chest has been set up successfully, and there are currently &d Chests,Click other blocks to continue,or use[/ymwb room end] to finish the room setting",//12
+                                "The Chest is already setted! Do not repeat it"//13
+                              ],
                        "game"=>[
                                ]
                       ]
@@ -104,11 +105,11 @@ abstract class Logger extends PluginBase {
                                 "房间&id的信息如下:\n中心点: &pos\n范围: &range\n最大人数: &mp\n等待区:&wp",//5
                                 "不能使用这个指令，原因: 你并不在设置房间或你不是在进行这一步骤",//6
                                 "你已退出设置，刚刚设置的数据清除。",//7
-                                "设置中心点成功，接下来请去空中的等待区(假如您已经建好了)，并使用[/ymwb room wait]设置。",//8
-                                "设置等待区成功，进入房间的玩家会被传送到这里。接下来请逐一点击地图内的箱子，推荐数量为[范围²/玩家数/10]",//9
+                                "设置中心点成功，接下来请去等待区(假如您已经建好了)，并使用[/ymwb room wait]设置。",//8
+                                "设置等待区成功，进入房间的玩家会被传送到这里。接下来请点击任意方块设置箱子，推荐数量为[范围²/玩家数/10] 计算结果为(&d)",//9
                                 "无法完成设置，原因: 未设置中心点、等待区或箱子。",//10
                                 "恭喜你，设置完成!",//11
-                                "箱子设置成功，当前共&d个箱子,点箱子继续设置，完成设置使用[/ymwb room end]",//12
+                                "箱子设置成功，当前共&d个箱子,点方块继续设置，完成设置使用[/ymwb room end]",//12
                                 "该箱子已存在!请勿重复设置"//13
                                ],
                        "game"=>[
