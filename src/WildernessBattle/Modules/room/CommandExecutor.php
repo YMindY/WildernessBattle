@@ -19,27 +19,20 @@ class CommandExecutor implements Listener{
    	   $p=$e->getPlayer();
    	   if(isset($this->{$p->getName()})){
    	      if($this->{$p->getName()}["state"]=="wait"){
-   	         if($e->getBlock()->getID()==54){
-   	            $list=$this->{$p->getName()};
-   	            $conf=$this->createConfig("r".$list["id"]);
-   	            $che=$conf->get("Chests");
-   	            $b=$e->getBlock();
-   	            if(!in_array($b->getX().":".$b->getY().":".$b->getZ(),$che)){
-   	               $b->getLevel()->setBlock($b, \pocketmine\block\Block::get(54), true, true);
-   	               $che[]=$b->getX().":".$b->getY().":".$b->getZ();
-   	               $conf->set("Chests",$che);
-   	               $conf->save();
-   	               $p->sendMessage(str_replace("&d",count($che),$this->getMessage(12)));
-   	               $e->setCancelled();
-   	               unset($conf);
-   	               unset($che);
-   	            }else{
-   	               $p->sendMessage($this->getMessage(13));
-   	               $e->setCancelled();
-   	            }
-   	            unset($list);
-   	            unset($b);
-   	            unset($p);
+   	         $list=$this->{$p->getName()};
+   	         $conf=$this->createConfig("r".$list["id"]);
+   	         $che=$conf->get("Chests");
+   	         $b=$e->getBlock();
+   	         if(!in_array($b->getX().":".$b->getY().":".$b->getZ(),$che)){
+   	            $b->getLevel()->setBlock($b, \pocketmine\block\Block::get(54), true, true);
+   	            $che[]=$b->getX().":".$b->getY().":".$b->getZ();
+   	            $conf->set("Chests",$che);
+   	            $conf->save();
+   	            $p->sendMessage(str_replace("&d",count($che),$this->getMessage(12)));
+   	            $e->setCancelled();
+   	         }else{
+   	            $p->sendMessage($this->getMessage(13));
+   	            $e->setCancelled();
    	         }
    	      }
    	   }
@@ -47,6 +40,10 @@ class CommandExecutor implements Listener{
    	public function runCommand(CommandSender $sender,array $args){
    	   if(!isset($args[1])){
    	      $sender->sendMessage($this->getMessage(0));
+   	      return false;
+   	   }
+   	   if((!$sender instanceof \pocketmine\Player) && in_array($args[1],array("add","quit","cen","wait","end"))){
+   	      $sender->sendMessage($this->getMessage(14));
    	      return false;
    	   }
    	   switch($args[1]){
@@ -59,7 +56,6 @@ class CommandExecutor implements Listener{
    	         $this->createConfig("r".$id,array("id"=>$id,"waitPlace"=>"x:x:x:x","pos"=>"x:x:x:x","range"=>$args[2],"MaxPlayer"=>$args[3],"Chests"=>array()));
    	         $sender->sendMessage(str_replace(array("&1","&2","&3"),array($id,$args[2],$args[3]),$this->getMessage(2)));
    	         $this->{$sender->getName()}=array("id"=>$id,"state"=>"add");
-   	         unset($id);
    	         return true;
           break;
           case "remove":
@@ -69,13 +65,11 @@ class CommandExecutor implements Listener{
              unlink($this->getDataFolder()."r".$args[2]);
              $rl=RoomManager::getModule()->config->get("RoomList");
              $rc=RoomManager::getModule()->config->get("RoomCount");
-             $rl=$this->removeArrItembyValue($rl,"r".$arg[2]);
+             $rl=$this->removeArrItembyValue($rl,"r".$args[2]);
              $rc--;
              RoomManager::getModule()->config->set("RoomList",$rl);
              RoomManager::getModule()->config->set("RoomCount",$rc);
              RoomManager::getModule()->config->save();
-             unset($rl);
-             unset($rc);
              return true;
           break;
           case "info":
@@ -83,8 +77,7 @@ class CommandExecutor implements Listener{
                 return false;
              }
              $ri=$this->createConfig("r".$args[2])->getAll();
-             $sender->sendMessage(str_replace(array("&pos","&range","&mp","&wp"),array($ri["pos"],$ri["range"],$ri["MaxPlayer"],$ri["waitPlace"]),$this->getMessage(5)));
-             unset($ri);
+             $sender->sendMessage(str_replace(array("&id","&pos","&range","&mp","&wp"),array($args[2],$ri["pos"],$ri["range"],$ri["MaxPlayer"],$ri["waitPlace"]),$this->getMessage(5)));
              return true;
           break;
           case "cen":
@@ -97,8 +90,6 @@ class CommandExecutor implements Listener{
              $conf->save();
              $sender->sendMessage($this->getMessage(8));
              $this->{$sender->getName()}["state"]="cen";
-             unset($conf);
-             unset($player);
              return true;
           break;
           case "wait":
@@ -109,10 +100,12 @@ class CommandExecutor implements Listener{
              $player=$this->main->getServer()->getPlayer($sender->getName());
              $conf->set("waitPlace",$player->getLevel()->getName().":".$player->getX().":".$player->getZ());
              $conf->save();
-             $sender->sendMessage($this->getMessage(9));
+             $r=$conf->get("Range");
+             $m=$conf->get("MaxPlayer");
+             $result=$r*$r/$m/10;
+             $sender->sendMessage(str_replace("&d",$result,$this->getMessage(9)));
              $this->{$sender->getName()}["state"]="wait";
-             unset($conf);
-             unset($player);
+
              return true;
           break;
           case "quit":

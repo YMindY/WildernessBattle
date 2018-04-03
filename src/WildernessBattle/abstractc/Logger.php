@@ -69,7 +69,8 @@ abstract class Logger extends PluginBase {
                                 "Unable to complete setting, cause: no center point, waiting place or chests",//10
                                 "Congratulations, set it up!",//11
                                 "The Chest has been set up successfully, and there are currently &d Chests,Click other blocks to continue,or use[/ymwb room end] to finish the room setting",//12
-                                "The Chest is already setted! Do not repeat it"//13
+                                "The Chest is already setted! Do not repeat it",//13
+                                "Do not use this command on console!"
                               ],
                        "game"=>[
                                ]
@@ -110,7 +111,8 @@ abstract class Logger extends PluginBase {
                                 "无法完成设置，原因: 未设置中心点、等待区或箱子。",//10
                                 "恭喜你，设置完成!",//11
                                 "箱子设置成功，当前共&d个箱子,点方块继续设置，完成设置使用[/ymwb room end]",//12
-                                "该箱子已存在!请勿重复设置"//13
+                                "该箱子已存在!请勿重复设置",//13
+                                "请不要用控制台执行此指令!"//14
                                ],
                        "game"=>[
                                ]
